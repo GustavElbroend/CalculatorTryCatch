@@ -1,3 +1,4 @@
+using System;
 using CalculatorTryCatch;
 using NUnit.Framework;
 
@@ -43,5 +44,14 @@ namespace CalculatorNUnitTest
         {
             Assert.That(uut.Power(a, b), Is.EqualTo(expected));
         }
+
+        [TestCase(100, 2, 100)]
+        [TestCase(5, 200, 25)]
+        [TestCase(200, 4, 16)]
+        public void ctor_NumbersToLarge(double a, double b, double exp)
+        {
+            Assert.That(() => uut.Add(a,b), Throws.TypeOf<Exception>().With.Message.EqualTo("Number to large"));
+        }
+        // dette skal så i teorien gøres for alle metoderne
     }
 }
