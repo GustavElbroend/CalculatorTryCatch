@@ -53,5 +53,15 @@ namespace CalculatorNUnitTest
             Assert.That(() => uut.Add(a,b), Throws.TypeOf<Exception>().With.Message.EqualTo("Number to large"));
         }
         // dette skal så i teorien gøres for alle metoderne
+
+        [TestCase(100, 2, 100)]
+        [TestCase(5, 200, 25)]
+        [TestCase(200, 4, 16)]
+        public void ctor_NumbersToLargeAndenTestVersion(double a, double b, double exp)
+        {
+            Assert.That(() => uut.Add(a, b), Throws.TypeOf<Exception>().With.Message.EqualTo("Number to large"));
+            var exc = Assert.Catch<Exception>(() => uut.Add(a, b));
+            Assert.That(exc.Message, Is.EqualTo("Number to large")); //Her testes det samme, men bare på en anden måde.
+        }
     }
 }
